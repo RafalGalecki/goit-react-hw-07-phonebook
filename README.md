@@ -1,4 +1,4 @@
-Website: (https://rafalgalecki.github.io/goit-react-hw-06-phonebook/)
+Website: (https://rafalgalecki.github.io/goit-react-hw-07-phonebook/)
 
 **Read in other languages: [rosyjski](README.md), [polski](README.pl.md).**
 
