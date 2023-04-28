@@ -1,43 +1,37 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
-//import { selectContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import { addContact } from '../../redux/operations';
-//import { Notify } from 'notiflix';
+import { Notify } from 'notiflix';
 import css from './ContactForm.module.css';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  //const contacts = useSelector(selectContacts);
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = event => {
     event.preventDefault();
     const form = event.target;
-    // const contact = {
-    //   id: nanoid(),
-    //   name: form.name.value,
-    //   phone: form.phone.value,
-    // };
 
-    // let isContact;
-    // contacts.forEach(person => {
-    //   if (contact.name.toLowerCase() === person.name.toLowerCase()) {
-    //     isContact = true;
-    //   }
-    // });
-    // isContact
-    //   ? Notify.warning(`${contact} is already in your Contacts.`, {
-    //       timeout: 3000,
-    //       position: 'left-top',
-    //       closeButton: true,
-    //     })
-    //   : dispatch(addContact(contact));
-    dispatch(
-      addContact({
-        id: nanoid(),
-        name: form.name.value,
-        phone: form.phone.value,
-      })
-    );
+    let isContact;
+    contacts.forEach(person => {
+      if (form.name.value.toLowerCase() === person.name.toLowerCase()) {
+        isContact = true;
+      }
+    });
+    isContact
+      ? Notify.warning(`${form.name.value} is already in your Contacts.`, {
+          timeout: 3000,
+          position: 'left-top',
+          closeButton: true,
+        })
+      : dispatch(
+          addContact({
+            id: nanoid(),
+            name: form.name.value,
+            phone: form.phone.value,
+          })
+        );
     form.reset();
   };
 
