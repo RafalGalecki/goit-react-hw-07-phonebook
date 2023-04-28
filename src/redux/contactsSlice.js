@@ -10,7 +10,7 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
-// The two functions beneath are for builder:
+// The two functions beneath are for builder callback:
 const isPendingAction = action => {
   return action.type.endsWith('/pending');
 };
@@ -54,29 +54,5 @@ const contactsSlice = createSlice({
       });
   },
 });
-
-// reducers: {
-//   addContact: {
-//     reducer(state, action) {
-//       state.push(action.payload);
-//       setLocalStorage([...state]);
-//     },
-//     prepare(text) {
-//       return {
-//         payload: {
-//           id: nanoid(),
-//           name: text.name,
-//           number: text.number,
-//         },
-//       };
-//     },
-//   },
-//   deleteContact: {
-//     reducer(state, action) {
-//       const index = state.findIndex(contact => contact.id === action.payload);
-//       state.splice(index, 1);
-//       setLocalStorage([...state]);
-//     },
-//   },
 
 export const contactsReducer = contactsSlice.reducer;
