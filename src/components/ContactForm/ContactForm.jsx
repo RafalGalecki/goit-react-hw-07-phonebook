@@ -1,36 +1,43 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
-import { selectContacts } from 'redux/selectors';
+//import { selectContacts } from 'redux/selectors';
 import { addContact } from '../../redux/operations';
-import { Notify } from 'notiflix';
+//import { Notify } from 'notiflix';
 import css from './ContactForm.module.css';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
+  //const contacts = useSelector(selectContacts);
 
   const handleSubmit = event => {
     event.preventDefault();
     const form = event.target;
-    const contact = {
-      name: form.name.value,
-      number: form.number.value,
-    };
+    // const contact = {
+    //   id: nanoid(),
+    //   name: form.name.value,
+    //   phone: form.phone.value,
+    // };
 
-    let isContact;
-    contacts.forEach(person => {
-      if (contact.name.toLowerCase() === person.name.toLowerCase()) {
-        isContact = true;
-      }
-    });
-    isContact
-      ? Notify.warning(`${contact} is already in your Contacts.`, {
-          timeout: 3000,
-          position: 'left-top',
-          closeButton: true,
-        })
-      : dispatch(addContact(contact));
-
+    // let isContact;
+    // contacts.forEach(person => {
+    //   if (contact.name.toLowerCase() === person.name.toLowerCase()) {
+    //     isContact = true;
+    //   }
+    // });
+    // isContact
+    //   ? Notify.warning(`${contact} is already in your Contacts.`, {
+    //       timeout: 3000,
+    //       position: 'left-top',
+    //       closeButton: true,
+    //     })
+    //   : dispatch(addContact(contact));
+    dispatch(
+      addContact({
+        id: nanoid(),
+        name: form.name.value,
+        phone: form.phone.value,
+      })
+    );
     form.reset();
   };
 
@@ -54,7 +61,7 @@ const ContactForm = () => {
       <input
         id={numberInputId}
         type="tel"
-        name="number"
+        name="phone"
         className={css.inputName}
         placeholder="Enter contact's number"
         pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
